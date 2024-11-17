@@ -9,8 +9,10 @@ RUN mvn clean package
 
 FROM eclipse-temurin:17.0.12_7-jre-jammy
 
+ENV APP_VERSION=${APP_VERSION}
+
 WORKDIR /app
 
 COPY --from=builder /app/target .
 
-CMD ["java", "-jar", "my-app-$APP_VERSION.jar"]
+CMD ["java", "-jar", "my-app-${APP_VERSION}.jar"]
