@@ -41,7 +41,12 @@ jobs:
     - name: Push Docker image
       run: docker push ${{ secrets.DOCKER_USERNAME }}/my-app:latest
 
+    - name: Start SSH agent
+      uses: webfactory/ssh-agent@v0.8.1
+      with:
+        ssh-private-key: ${{ secrets.AWS_KEY }}
+
     - name: Deploy
       run: |
-        ssh -o StrictHostKeyChecking=no IdentityFile=<(echo ${{ secrets.AWS_KEY }}) ubuntu@16.171.234.74\
+        ssh -o StrictHostKeyChecking=no ubuntu@16.171.234.74 \
         'sudo docker run --rm ${{ secrets.DOCKER_USERNAME }}/my-app:latest'
