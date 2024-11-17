@@ -42,7 +42,7 @@ jobs:
       run: docker push ${{ secrets.DOCKER_USERNAME }}/my-app:latest
 
     - name: Start SSH agent
-      uses: webfactory/ssh-agent@v0.8.1
+      uses: webfactory/ssh-agent@v0
       with:
         ssh-private-key: ${{ secrets.AWS_KEY }}
 
