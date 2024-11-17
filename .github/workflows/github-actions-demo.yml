@@ -22,7 +22,7 @@ jobs:
         
     - name: Update version
       run: |
-        chmod +x ./update_version.sh
+        ./update_version.sh
         NEW_VERSION=$(./update_version.sh)
         echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
     
