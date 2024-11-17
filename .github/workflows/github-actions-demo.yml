@@ -11,8 +11,6 @@ jobs:
     steps:
     - name: Checkout from SCM
       uses: actions/checkout@v4
-      with:
-        fetch-depth: 0  # This ensures we have the git history
         
     - name: Set up JDK
       uses: actions/setup-java@v3
@@ -22,22 +20,20 @@ jobs:
         
     - name: Update version
       run: |
-        NEW_VERSION=$(./update_version.sh)
-        echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
+        ./update_version.sh
     
     - name: Build the Docker image
       run: |
         docker build . \
         --file Dockerfile \
-        --tag ${{ secrets.DOCKER_USERNAME }}/my-app:latest \
-        --tag ${{ secrets.DOCKER_USERNAME }}/my-app:${{ env.NEW_VERSION }}
+        --tag ${{ secrets.DOCKER_USERNAME }}/my-app:latest
         
     - name: Push changes to GitHub
       run: |
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
         git add pom.xml
-        git commit -m "Bump version to ${{ env.NEW_VERSION }}"
+        git commit -m "Bump version"
         git push
         
     - name: Log in to Docker Hub
@@ -49,7 +45,6 @@ jobs:
     - name: Push Docker images
       run: |
         docker push ${{ secrets.DOCKER_USERNAME }}/my-app:latest
-        docker push ${{ secrets.DOCKER_USERNAME }}/my-app:${{ env.NEW_VERSION }}
         
     - name: Start SSH agent
       uses: webfactory/ssh-agent@v0.9.0
