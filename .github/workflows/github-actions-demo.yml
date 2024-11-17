@@ -27,3 +27,8 @@ jobs:
 
     - name: Push Image
       run: docker push ${{ secrets.DOCKER_USERNAME }}/my-app:latest
+
+    - name: Deploy
+      run: |
+        ssh -o StrictHostKeyChecking=no -i ${{ secrets.AWS_KEY }} ubuntu@16.171.234.74\
+        'sudo docker run --rm ${{ secrets.DOCKER_USERNAME }}/my-app:latest'

@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN mvn clean package
+RUN ./update_version && mvn clean package
 
 FROM eclipse-temurin:17.0.12_7-jre-jammy
 
