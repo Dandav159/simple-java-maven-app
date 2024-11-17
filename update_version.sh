@@ -1,9 +1,16 @@
 #!/bin/bash
 
-current_version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+# Get the current version from pom.xml
+CURRENT_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
 
-IFS='.' read -r major minor patch <<< "$current_version"
-patch=$((patch + 1))
-new_version="$major.$minor.$patch"
+# Split version into major, minor, and patch
+IFS='.' read -r MAJOR MINOR PATCH <<< "$CURRENT_VERSION"
 
-mvn versions:set -DnewVersion="$new_version"
+# Increment patch version
+NEW_PATCH=$((PATCH + 1))
+NEW_VERSION="$MAJOR.$MINOR.$NEW_PATCH"
+
+# Update version in pom.xml using mvn versions:set
+mvn versions:set -DnewVersion=$NEW_VERSION -DgenerateBackupPoms=false
+
+echo $NEW_VERSION
