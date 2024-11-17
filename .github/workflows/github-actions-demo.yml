@@ -54,7 +54,7 @@ jobs:
     - name: Deploy
       run: |
         ssh -o StrictHostKeyChecking=no ubuntu@16.171.234.74 << 'EOF'
-          docker pull ${{ secrets.DOCKER_USERNAME }}/my-app:latest
-          docker stop my-app || true
-          docker rm my-app || true
-          docker run -d --name my-app ${{ secrets.DOCKER_USERNAME }}/my-app:latest
+          sudo docker pull ${{ secrets.DOCKER_USERNAME }}/my-app:latest
+          sudo docker stop my-app || true
+          sudo docker rm my-app || true
+          sudo docker run -d --name my-app ${{ secrets.DOCKER_USERNAME }}/my-app:latest
