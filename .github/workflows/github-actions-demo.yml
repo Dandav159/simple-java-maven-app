@@ -64,4 +64,3 @@ jobs:
           docker stop my-app || true
           docker rm my-app || true
           docker run -d --name my-app ${{ secrets.DOCKER_USERNAME }}/my-app:latest
-EOF
