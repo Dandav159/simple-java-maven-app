@@ -43,5 +43,5 @@ jobs:
 
     - name: Deploy
       run: |
-        ssh -o StrictHostKeyChecking=no ${{ secrets.AWS_KEY }} ubuntu@16.171.234.74\
+        ssh -o StrictHostKeyChecking=no IdentityFile=<(echo ${{ secrets.AWS_KEY }}) ubuntu@16.171.234.74\
         'sudo docker run --rm ${{ secrets.DOCKER_USERNAME }}/my-app:latest'
