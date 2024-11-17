@@ -9,7 +9,7 @@ RUN mvn clean package
 
 FROM eclipse-temurin:17.0.12_7-jre-jammy
 
-ENV APP_VERSION=${APP_VERSION}
+ENV APP_VERSION=1.0.0
 
 WORKDIR /app
 
