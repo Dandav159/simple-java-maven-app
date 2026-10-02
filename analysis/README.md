@@ -14,6 +14,7 @@ python analyze_factors.py  # -> output/factors_results.json, output/factors_*.pn
 python compression.py      # -> output/compression_results.json (needs sp500 data)
 python predict_compression.py  # -> output/predict_compression_results.json, .png
 python grassmann.py        # -> output/grassmann_results.json, output/grassmann_*.png
+python ica_pca.py          # -> output/ica_pca_results.json, output/ica_pca.png
 ```
 
 ## Buckets (assigned by realized volatility in the train window only)
@@ -149,8 +150,26 @@ One lead, not a finding: faster rotation correlated with a *higher* next-month S
 
 Removing the shared subspace made the strategy **worse** than the plain control by 8.4%/yr in test (t = −0.96, i.e. not distinguishable). Neither is significant after 2020, and both lose money after costs.
 
+## Part 5: is some blend of stocks predictable? (`ica_pca.py`)
+
+Maybe no single stock is predictable but some portfolio of them is. Three rotations of 452 stocks' standardized returns, fit on 2014–2020 within the top 20 principal components (moves capped at 4 sd while fitting, otherwise March 2020 dominates the fit):
+
+- **PCA:** the blends that move the most
+- **ICA (FastICA):** statistically independent blends, the candidate "hidden drivers"
+- **Box-Tiao (1977):** the blends whose tomorrow is *most predictable* from today, found by a generalized eigenproblem on a VAR(1)
+
+The best Box-Tiao blend explains 25% of next-day variance in train. In test, **no blend from any method exceeds a 0.07 day-to-day correlation**. 6 of 60 fall outside the ±2/√n noise band, close to the ~3 that chance predicts (`output/ica_pca.png`). Trading the 3 most predictable blends per method by the sign of today's move:
+
+| Method | Train before costs | Test before costs | **Test after costs** |
+|---|---:|---:|---:|
+| PCA | +1.6% (SR 0.28) | +0.8% (SR 0.19, t 0.44) | **−11.1%** |
+| ICA | +2.3% (SR 0.89) | +1.0% (SR 0.46, t 1.11) | **−11.2%** |
+| Box-Tiao | +3.3% (SR 1.64) | +0.0% (SR 0.02, t 0.04) | **−12.2%** |
+
+The method built to find predictability found the most in-sample and kept none of it, which is the signature of fitting noise. ICA held up best (all 3 picks kept their sign), but the edge is ~1%/yr, insignificant, and an order of magnitude smaller than the cost of trading it daily.
+
 ## Caveats
-- **Parts 2–4 universe:** only current S&P 500 members could be downloaded. Each stock enters only from its index-inclusion date, but stocks that were removed (often losers) are still missing. This likely biases the result against low volatility, because high-volatility stocks that survived to 2026 are the winners.
+- **Parts 2–5 universe:** only current S&P 500 members could be downloaded. Each stock enters only from its index-inclusion date, but stocks that were removed (often losers) are still missing. This likely biases the result against low volatility, because high-volatility stocks that survived to 2026 are the winners.
 - Part 2 uses price-based factors only. Value, profitability and quality need point-in-time fundamentals, which this data source doesn't provide.
 - **Survivorship and selection bias:** the candidate lists were chosen in 2026 from stocks that still trade. Delisted high-volatility names are missing, which flatters the volatile basket.
 - Daily close-to-close data only. Intraday lead-lag (minutes) can exist between liquid and illiquid names, but exploiting it needs tick data and low-latency execution.
