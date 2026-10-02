@@ -8,6 +8,9 @@ Method: every pattern is **found on 2014–2020 (train)** and **tested unchanged
 pip install -r requirements.txt
 python fetch_data.py   # -> data/prices.csv
 python analyze.py      # -> output/results.json, output/*.png, output/*.csv
+
+python fetch_sp500.py      # -> data/sp500_prices.csv, data/sp500_members.csv
+python analyze_factors.py  # -> output/factors_results.json, output/factors_*.png
 ```
 
 ## Buckets (assigned by realized volatility in the train window only)
@@ -53,7 +56,47 @@ Betas to SPY over the full period: stable basket **0.51**, volatile basket **1.7
 
 Public daily price data shows **no exploitable pattern** between stable and volatile stocks. The real effects are structural: low unconditional correlation, correlations that jump in stress, and very different betas. These matter for portfolio construction, e.g. assuming diversification will fail when VIX spikes. They do not support a trading signal. The apparent signals are artifacts of a few extreme days, a large number of tests, and parameter selection.
 
+## Part 2: economic structure as a prior (`analyze_factors.py`)
+
+Instead of searching for patterns, this part uses signals whose direction is set **in advance** by published economic research. The model ranks ~400 S&P 500 members each month and buys the top 20% / shorts the bottom 20%, with signals neutralized within each sector. Costs are 10 bps per unit of turnover. Months run Jan 2015 – Sep 2026 (train 2015–2020, test 2021–2026).
+
+| Factor | Prior direction | Economic story | Source |
+|---|---|---|---|
+| 12-1 month momentum | + | Investors under-react to news | Jegadeesh & Titman 1993 |
+| 1-month reversal | − | Liquidity shocks revert | Jegadeesh 1990 |
+| Low volatility | + | Leverage-constrained investors overpay for risky stocks | Frazzini & Pedersen 2014 |
+| Near 52-week high | + | Anchoring delays the reaction to good news | George & Hwang 2004 |
+
+Three ways to weight the factors: **prior** (literature signs, equal weights, nothing fitted), **data** (Fama-MacBeth slopes estimated on train), and **bayes** (a prior premium of 0.15%/month per z-score, shrunk toward the train estimate).
+
+### Results
+
+| Weights | Train Sharpe | **Test Sharpe** | Test t-stat | Test ann. return (long-short) |
+|---|---:|---:|---:|---:|
+| prior | −0.44 | **−0.50** | −1.19 | −7.6% |
+| data | 0.41 | **0.52** | 1.24 | +6.8% |
+| bayes | −0.15 | **−0.08** | −0.20 | −1.4% |
+
+- **The priors did not hold in large-cap US stocks over 2015–2026.** No factor has a monthly rank IC with |t| > 1.3 in either period (`output/factors_ic.png`).
+- Low volatility worked **backwards** in both periods: risky stocks beat safe ones through the mega-cap tech rally. Momentum and 52-week-high flipped sign between train and test.
+- The "data" weights earned +6.8% a year out of sample, but only by betting on high volatility. Its t-stat of 1.24 is not significant: that is the 2021–2026 market rewarding risk, not a found edge.
+- This matches the literature. Published anomalies shrink by roughly half after publication (McLean & Pontiff 2016), and most are concentrated in small caps, not the S&P 500 (Hou, Xue & Zhang 2020).
+
+### The one prior that held: volatility clusters
+
+Scaling SPY exposure by target volatility divided by trailing 21-day realized volatility (Moreira & Muir 2017), with the target set on train:
+
+| | Train Sharpe | Test Sharpe | Test ann. return | Test max DD |
+|---|---:|---:|---:|---:|
+| SPY buy & hold | 0.78 | 0.91 | 14.8% | −24.5% |
+| Vol-managed, max 1x | 0.95 | **0.97** | 10.7% | **−13.6%** |
+| Vol-managed, max 2x | 0.89 | 0.85 | 9.9% | −14.6% |
+
+The Sharpe improvement is small. The real benefit is **cutting the worst drawdown roughly in half**, at the cost of lower raw return. This is risk control, not a source of extra return: later studies find vol-managed portfolios often fail to beat buy-and-hold after realistic constraints (Cederburg et al. 2020).
+
 ## Caveats
+- **Part 2 universe:** only current S&P 500 members could be downloaded. Each stock enters only from its index-inclusion date, but stocks that were removed (often losers) are still missing. This likely biases the result against low volatility, because high-volatility stocks that survived to 2026 are the winners.
+- Part 2 uses price-based factors only. Value, profitability and quality need point-in-time fundamentals, which this data source doesn't provide.
 - **Survivorship and selection bias:** the candidate lists were chosen in 2026 from stocks that still trade. Delisted high-volatility names are missing, which flatters the volatile basket.
 - Daily close-to-close data only. Intraday lead-lag (minutes) can exist between liquid and illiquid names, but exploiting it needs tick data and low-latency execution.
 - Costs are modeled as a flat 5 bps. Borrow costs for shorting volatile names (often high for MARA, RIOT, CVNA and PLUG) are excluded, which makes the short-volatile results look better than they would be.
