@@ -13,6 +13,7 @@ python fetch_sp500.py      # -> data/sp500_prices.csv, data/sp500_members.csv
 python analyze_factors.py  # -> output/factors_results.json, output/factors_*.png
 python compression.py      # -> output/compression_results.json (needs sp500 data)
 python predict_compression.py  # -> output/predict_compression_results.json, .png
+python grassmann.py        # -> output/grassmann_results.json, output/grassmann_*.png
 ```
 
 ## Buckets (assigned by realized volatility in the train window only)
@@ -123,8 +124,33 @@ The context model is turned into a next-day predictor and traded. It learns from
 
 Over 715,000 out-of-sample predictions, the compressor is **less accurate than always guessing "up"**. Ranking stocks earns a small pre-cost return, but none of it is statistically significant (the best case has t ≈ 1.4), and replacing most of the book every day turns it into a ~90% loss after costs.
 
+## Part 4: market structure on a Grassmannian (`grassmann.py`)
+
+The top-5 principal directions of ~450 stocks' standardized returns span a subspace: a point on Gr(5, n). The script measures its quarter-over-quarter rotation (geodesic distance from principal angles) and uses the subspace to separate shared moves from stock-specific residuals.
+
+**A. Does rotation warn of turbulence?** No. Forecasting next month's SPY volatility out of sample:
+
+| Inputs | Test R² |
+|---|---:|
+| Current volatility only | 0.303 |
+| + subspace rotation | 0.301 |
+| + absorption ratio (variance share of top 5) | 0.258 |
+
+The rotation spiked in March 2020 *together with* the crash, not before it (`output/grassmann_rotation.png`). Distances sit around 2.0–2.6 radians (max ≈ 3.5), so directions 2–5 are largely re-estimated noise each quarter; only the dominant market direction is stable.
+
+One lead, not a finding: faster rotation correlated with a *higher* next-month SPY return in the test period (r = 0.30, t ≈ 2.6) but not in train (r = 0.09). It was not specified in advance and was one of several correlations computed, so it needs fresh data before it means anything.
+
+**B. Residual reversal (statistical arbitrage).** Weekly: remove the shared 5-D subspace, buy the decile whose residuals fell most, short the decile that rose most, hold 5 days.
+
+| | Train before costs | Train after costs | Test before costs | **Test after costs** |
+|---|---:|---:|---:|---:|
+| Grassmannian residual reversal | +7.7% (SR 0.77) | −1.5% | +1.6% (SR 0.20) | **−7.2%** |
+| Plain 5-day reversal (no geometry) | +21.0% (SR 0.72) | +10.8% | +6.8% (SR 0.40) | **−2.2%** |
+
+Removing the shared subspace made the strategy **worse** than the plain control by 8.4%/yr in test (t = −0.96, i.e. not distinguishable). Neither is significant after 2020, and both lose money after costs.
+
 ## Caveats
-- **Part 2 universe:** only current S&P 500 members could be downloaded. Each stock enters only from its index-inclusion date, but stocks that were removed (often losers) are still missing. This likely biases the result against low volatility, because high-volatility stocks that survived to 2026 are the winners.
+- **Parts 2–4 universe:** only current S&P 500 members could be downloaded. Each stock enters only from its index-inclusion date, but stocks that were removed (often losers) are still missing. This likely biases the result against low volatility, because high-volatility stocks that survived to 2026 are the winners.
 - Part 2 uses price-based factors only. Value, profitability and quality need point-in-time fundamentals, which this data source doesn't provide.
 - **Survivorship and selection bias:** the candidate lists were chosen in 2026 from stocks that still trade. Delisted high-volatility names are missing, which flatters the volatile basket.
 - Daily close-to-close data only. Intraday lead-lag (minutes) can exist between liquid and illiquid names, but exploiting it needs tick data and low-latency execution.
