@@ -12,6 +12,7 @@ python analyze.py      # -> output/results.json, output/*.png, output/*.csv
 python fetch_sp500.py      # -> data/sp500_prices.csv, data/sp500_members.csv
 python analyze_factors.py  # -> output/factors_results.json, output/factors_*.png
 python compression.py      # -> output/compression_results.json (needs sp500 data)
+python predict_compression.py  # -> output/predict_compression_results.json, .png
 ```
 
 ## Buckets (assigned by realized volatility in the train window only)
@@ -109,6 +110,18 @@ Each of ~500 stocks' ~3,100 daily returns (1.54M days in total) becomes symbols,
 - **Direction barely compresses.** The pattern found is a slight one-day reversal: P(up after a down day) = 52.9% vs P(up after an up day) = 51.4%. As a predictor, it implies **~51% accuracy**, worth roughly **0.026% per trade** against an average move of 1.35%. That is less than the cost of a round trip, and it is an in-sample upper bound.
 - **Size compresses ~60× better than direction.** Volatility clusters, which is the same structure that made the volatility-managed overlay in Part 2 work.
 - **Sharing one model across stocks helps.** Per stock, models that look back 2+ days do *worse* than looking back 1 day because each context sees too few examples. Pooled, longer memory keeps improving (1.66% at 5 days). Shared structure is what makes "learning from less" work.
+
+### Part 3b: the compressor as a live forecaster (`predict_compression.py`)
+
+The context model is turned into a next-day predictor and traded. It learns from 2014–2020, then each day of 2021–2026 it predicts every stock before seeing that day and learns from the day afterwards. Each symbol combines the stock's direction, whether its move was bigger than usual, and the market's direction (8 symbols). The model is pooled across all stocks. Each day it buys the top 10% by predicted P(up) and shorts the bottom 10%.
+
+| Looks back | Accuracy | Always-guess-"up" accuracy | Before costs | **After 5 bps costs** |
+|---|---:|---:|---:|---:|
+| 1 day | 51.53% | 51.60% | +2.0%/yr (Sharpe 0.21) | **−35.2%/yr** |
+| 2 days | 51.44% | 51.60% | +7.2%/yr (Sharpe 0.57) | **−31.3%/yr** |
+| 3 days | 51.41% | 51.60% | +3.3%/yr (Sharpe 0.32) | **−33.6%/yr** |
+
+Over 715,000 out-of-sample predictions, the compressor is **less accurate than always guessing "up"**. Ranking stocks earns a small pre-cost return, but none of it is statistically significant (the best case has t ≈ 1.4), and replacing most of the book every day turns it into a ~90% loss after costs.
 
 ## Caveats
 - **Part 2 universe:** only current S&P 500 members could be downloaded. Each stock enters only from its index-inclusion date, but stocks that were removed (often losers) are still missing. This likely biases the result against low volatility, because high-volatility stocks that survived to 2026 are the winners.
