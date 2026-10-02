@@ -1,0 +1,141 @@
+{
+  "direction": {
+    "symbols": 1542378,
+    "max_bits_per_symbol": 1.0,
+    "order_0": {
+      "real_bits": 0.9992078283851159,
+      "shuffled_bits": 0.9992078283851159,
+      "saving_pct": 0.0
+    },
+    "order_1": {
+      "real_bits": 1.0002606881740441,
+      "shuffled_bits": 1.0006119805598166,
+      "saving_pct": 0.0351077533147226
+    },
+    "order_2": {
+      "real_bits": 1.0026699832797796,
+      "shuffled_bits": 1.0031060451883707,
+      "saving_pct": 0.043471167448616566
+    },
+    "order_3": {
+      "real_bits": 1.006975653410499,
+      "shuffled_bits": 1.0074571641194436,
+      "saving_pct": 0.047794658283606406
+    },
+    "order_5": {
+      "real_bits": 1.026506778890259,
+      "shuffled_bits": 1.027107424793227,
+      "saving_pct": 0.05847936529996822
+    },
+    "pooled_order_0": {
+      "real_bits": 0.9986877918962095,
+      "shuffled_bits": 0.9986877918962096,
+      "shuffled_sd": 1.1102230246251565e-16,
+      "saving_pct": 1.1102230246251565e-14
+    },
+    "pooled_order_1": {
+      "real_bits": 0.9985314943933543,
+      "shuffled_bits": 0.998692589711311,
+      "shuffled_sd": 2.2661722081276267e-06,
+      "saving_pct": 0.01613062113571262
+    },
+    "pooled_order_2": {
+      "real_bits": 0.9985075712588132,
+      "shuffled_bits": 0.9987057440295499,
+      "shuffled_sd": 7.634146906489097e-07,
+      "saving_pct": 0.019842958941751476
+    },
+    "pooled_order_3": {
+      "real_bits": 0.998453516527117,
+      "shuffled_bits": 0.9987306314755424,
+      "shuffled_sd": 4.1081280867237635e-06,
+      "saving_pct": 0.027746715650045495
+    },
+    "pooled_order_5": {
+      "real_bits": 0.9984913974584706,
+      "shuffled_bits": 0.9988627784057904,
+      "shuffled_sd": 8.673472253609404e-06,
+      "saving_pct": 0.03718037705965349
+    },
+    "lzma_bz2": {
+      "real_bits": 1.4072088683837556,
+      "shuffled_bits": 1.4121342498401817,
+      "saving_pct": 0.34878988715014714
+    },
+    "best_order": 0
+  },
+  "size": {
+    "symbols": 1542378,
+    "max_bits_per_symbol": 2.0,
+    "order_0": {
+      "real_bits": 2.0053557743751735,
+      "shuffled_bits": 2.0053557743751735,
+      "saving_pct": 0.0
+    },
+    "order_1": {
+      "real_bits": 1.9996457584801641,
+      "shuffled_bits": 2.0154864708993676,
+      "saving_pct": 0.7859498264026987
+    },
+    "order_2": {
+      "real_bits": 2.019522197374677,
+      "shuffled_bits": 2.044498782462941,
+      "saving_pct": 1.221648322929092
+    },
+    "order_3": {
+      "real_bits": 2.082216385408749,
+      "shuffled_bits": 2.1143677861056807,
+      "saving_pct": 1.520615330417474
+    },
+    "order_5": {
+      "real_bits": 2.1360489072307134,
+      "shuffled_bits": 2.1649692074646683,
+      "saving_pct": 1.3358296337074749
+    },
+    "pooled_order_0": {
+      "real_bits": 2.000019553964274,
+      "shuffled_bits": 2.000019553964274,
+      "shuffled_sd": 0.0,
+      "saving_pct": 0.0
+    },
+    "pooled_order_1": {
+      "real_bits": 1.9876917503197853,
+      "shuffled_bits": 2.0000728793632256,
+      "shuffled_sd": 3.3550783849282077e-06,
+      "saving_pct": 0.6190338947739793
+    },
+    "pooled_order_2": {
+      "real_bits": 1.9799731853956641,
+      "shuffled_bits": 2.000258442247774,
+      "shuffled_sd": 1.4508665603599619e-06,
+      "saving_pct": 1.0141317953551332
+    },
+    "pooled_order_3": {
+      "real_bits": 1.9750358054313164,
+      "shuffled_bits": 2.000868775838149,
+      "shuffled_sd": 4.562715882925043e-06,
+      "saving_pct": 1.291087687447734
+    },
+    "pooled_order_5": {
+      "real_bits": 1.975517939452337,
+      "shuffled_bits": 2.0088156496159417,
+      "shuffled_sd": 5.58349328961912e-05,
+      "saving_pct": 1.657579189507552
+    },
+    "lzma_bz2": {
+      "real_bits": 2.2894154351267977,
+      "shuffled_bits": 2.2958117919213046,
+      "saving_pct": 0.27860980664943247
+    },
+    "best_order": 1
+  },
+  "direction_pattern": {
+    "best_pooled_order": 3,
+    "bits_saved_per_day": 0.0002771149484254165,
+    "implied_accuracy": 0.5098,
+    "avg_abs_daily_move": 0.013462374090125247,
+    "implied_edge_per_trade": 0.00026386253216645567,
+    "p_up_after_up": 0.5140930012880001,
+    "p_up_after_down": 0.5291583382853439
+  }
+}

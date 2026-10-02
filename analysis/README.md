@@ -11,6 +11,7 @@ python analyze.py      # -> output/results.json, output/*.png, output/*.csv
 
 python fetch_sp500.py      # -> data/sp500_prices.csv, data/sp500_members.csv
 python analyze_factors.py  # -> output/factors_results.json, output/factors_*.png
+python compression.py      # -> output/compression_results.json (needs sp500 data)
 ```
 
 ## Buckets (assigned by realized volatility in the train window only)
@@ -93,6 +94,21 @@ Scaling SPY exposure by target volatility divided by trailing 21-day realized vo
 | Vol-managed, max 2x | 0.89 | 0.85 | 9.9% | −14.6% |
 
 The Sharpe improvement is small. The real benefit is **cutting the worst drawdown roughly in half**, at the cost of lower raw return. This is risk control, not a source of extra return: later studies find vol-managed portfolios often fail to beat buy-and-hold after realistic constraints (Cederburg et al. 2020).
+
+## Part 3: prediction as compression (`compression.py`)
+
+If daily moves contain predictable patterns, a sequence of moves should compress better than the same moves in shuffled order. Shuffling keeps symbol frequencies but destroys order. The test needs no trading rule: it measures the information in the sequence directly.
+
+Each of ~500 stocks' ~3,100 daily returns (1.54M days in total) becomes symbols, which are then coded with an adaptive context model looking back 0–5 days. This is an exact arithmetic-coding length, so it is a genuine online predictor. The model runs per stock and also as one shared ("pooled") model across all stocks. lzma/bz2 serve as a sanity check.
+
+| What is predicted | Max bits/day | Best pooled bits/day | Saving vs shuffled |
+|---|---:|---:|---:|
+| Direction (up/down) | 1.000 | 0.9985 | **0.03%** |
+| Size (quartile of the day's move) | 2.000 | 1.9755 | **1.66%** |
+
+- **Direction barely compresses.** The pattern found is a slight one-day reversal: P(up after a down day) = 52.9% vs P(up after an up day) = 51.4%. As a predictor, it implies **~51% accuracy**, worth roughly **0.026% per trade** against an average move of 1.35%. That is less than the cost of a round trip, and it is an in-sample upper bound.
+- **Size compresses ~60× better than direction.** Volatility clusters, which is the same structure that made the volatility-managed overlay in Part 2 work.
+- **Sharing one model across stocks helps.** Per stock, models that look back 2+ days do *worse* than looking back 1 day because each context sees too few examples. Pooled, longer memory keeps improving (1.66% at 5 days). Shared structure is what makes "learning from less" work.
 
 ## Caveats
 - **Part 2 universe:** only current S&P 500 members could be downloaded. Each stock enters only from its index-inclusion date, but stocks that were removed (often losers) are still missing. This likely biases the result against low volatility, because high-volatility stocks that survived to 2026 are the winners.
