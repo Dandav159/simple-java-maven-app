@@ -158,7 +158,7 @@ Maybe no single stock is predictable but some portfolio of them is. Three rotati
 - **ICA (FastICA):** statistically independent blends, the candidate "hidden drivers"
 - **Box-Tiao (1977):** the blends whose tomorrow is *most predictable* from today, found by a generalized eigenproblem on a VAR(1)
 
-The best Box-Tiao blend explains 25% of next-day variance in train. In test, **no blend from any method exceeds a 0.07 day-to-day correlation**. 6 of 60 fall outside the ±2/√n noise band, close to the ~3 that chance predicts (`output/ica_pca.png`). Trading the 3 most predictable blends per method by the sign of today's move:
+The best Box-Tiao blend explains 25% of next-day variance in train. In test, **no blend from any method exceeds a 0.07 day-to-day correlation**. 7 of 60 fall outside the ±2/√n noise band, against ~3 expected by chance, all with |r| < 0.07 (`output/ica_pca.png`). Trading the 3 most predictable blends per method by the sign of today's move:
 
 | Method | Train before costs | Test before costs | **Test after costs** |
 |---|---:|---:|---:|
