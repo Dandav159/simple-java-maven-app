@@ -15,6 +15,9 @@ python compression.py      # -> output/compression_results.json (needs sp500 dat
 python predict_compression.py  # -> output/predict_compression_results.json, .png
 python grassmann.py        # -> output/grassmann_results.json, output/grassmann_*.png
 python ica_pca.py          # -> output/ica_pca_results.json, output/ica_pca.png
+
+python fetch_macro.py      # -> data/macro_*.csv, data/sp500_open.csv
+python ica_macro.py        # -> output/ica_macro_results.json, output/ica_macro.png
 ```
 
 ## Buckets (assigned by realized volatility in the train window only)
@@ -168,8 +171,37 @@ The best Box-Tiao blend explains 25% of next-day variance in train. In test, **n
 
 The method built to find predictability found the most in-sample and kept none of it, which is the signature of fitting noise. ICA held up best (all 3 picks kept their sign), but the edge is ~1%/yr, insignificant, and an order of magnitude smaller than the cost of trading it daily.
 
+## Part 6: ICA drivers predicted from outside data (`ica_macro.py`)
+
+Part 5 asked whether the ICA blends predict *themselves*. This part brings in information that isn't in stock prices: Treasury yields (3m, 5y, 10y), oil, gold, copper, natural gas, the dollar index, credit (HYG, LQD), long Treasuries, emerging markets, VIX, and stock indices in Japan, Hong Kong, Australia, Korea, Germany and the UK. All data is from Yahoo Finance and stamped with each exchange's local date.
+
+### ICA finds real, nameable drivers
+Correlation of each ICA blend with same-day outside moves (train, in-sample):
+
+| Driver | Moves with | Same-day R² |
+|---|---|---:|
+| IC18 | Emerging markets (−0.71), high-yield credit (−0.68): broad risk-on/off | 0.64 |
+| IC3 | 5y and 10y Treasury yields (+0.41): rates | 0.19 |
+| IC20 | FTSE (−0.34), DAX (−0.30): Europe | 0.18 |
+| IC5 / IC7 / IC8 | Crude oil (+0.35 / −0.30 / +0.27): energy, three separate ways | 0.10–0.17 |
+| IC13 / IC14 | Credit (+0.27) / long Treasuries (−0.29): credit and duration | 0.13–0.14 |
+
+Several drivers (IC2, IC4, IC17, IC19) match nothing in the outside data (R² ≤ 0.02). They are stock-specific or reflect factors these series don't capture.
+
+### But none of them can be predicted
+Ridge regressions fit on 2014–2020 and tested on 2021–2026; the 20 drivers are traded long/short by the forecast's sign:
+
+| Test | Information used | Avg forecast correlation | Before costs | **After costs** |
+|---|---|---:|---:|---:|
+| A | Yesterday's outside moves | +0.011 | +0.5%/yr (t 1.39) | **−4.3%/yr** |
+| B | Asia's close (finishes before the US opens) → US open-to-close | +0.017 | +0.1%/yr (t 0.41) | **−25.1%/yr** |
+| B2 | B + the US overnight gap | +0.013 | +0.2%/yr (t 0.75) | **−25.0%/yr** |
+| C | Last month's outside moves → next month | −0.024 | −0.3%/yr (t −0.76) | **−0.4%/yr** |
+
+In each test, 3–4 of 20 drivers fall outside their ±2/√n noise band, against ~1 expected, and several of those point the wrong way. None of the trades is significant. SPY, the control, isn't predictable either: its forecast correlation is negative in all four tests (`output/ica_macro.png`). Asia is fully priced in by the US open. Outside data *explains* the drivers on the same day but does not *predict* them a day or a month ahead.
+
 ## Caveats
-- **Parts 2–5 universe:** only current S&P 500 members could be downloaded. Each stock enters only from its index-inclusion date, but stocks that were removed (often losers) are still missing. This likely biases the result against low volatility, because high-volatility stocks that survived to 2026 are the winners.
+- **Parts 2–6 universe:** only current S&P 500 members could be downloaded. Each stock enters only from its index-inclusion date, but stocks that were removed (often losers) are still missing. This likely biases the result against low volatility, because high-volatility stocks that survived to 2026 are the winners.
 - Part 2 uses price-based factors only. Value, profitability and quality need point-in-time fundamentals, which this data source doesn't provide.
 - **Survivorship and selection bias:** the candidate lists were chosen in 2026 from stocks that still trade. Delisted high-volatility names are missing, which flatters the volatile basket.
 - Daily close-to-close data only. Intraday lead-lag (minutes) can exist between liquid and illiquid names, but exploiting it needs tick data and low-latency execution.

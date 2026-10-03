@@ -22,39 +22,27 @@ from pathlib import Path
 import matplotlib
 import numpy as np
 import pandas as pd
-from sklearn.decomposition import FastICA
 
+from blends import CLIP, fit, load_returns
 from common import BLUE, GRAY, ORANGE, OUT, TEST, TRAIN, style, summarize
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 
 HERE = Path(__file__).parent
-M = 20                 # dimensions kept from PCA; all methods rotate within these
 TOP = 3                # blends per method chosen on train by predictability
 COST_BPS = 5
-CLIP = 4.0             # cap standardized moves at 4 sd when FITTING, so a few crash days can't dominate
 GREEN = "#1baf7a"
 
-prices = pd.read_csv(HERE / "data" / "sp500_prices.csv", index_col=0, parse_dates=True)
-prices = prices.loc[prices["SPY"].notna()].drop(columns=["^VIX", "SPY"])
-rets = prices.pct_change(fill_method=None).iloc[1:]
-rets = rets.loc[:, rets.notna().all()]                       # stocks with the full history
+rets = load_returns()
 tr, te = rets.loc[TRAIN[0]:TRAIN[1]], rets.loc[TEST[0]:TEST[1]]
-mu, sd = tr.mean(), tr.std()
+mu, sd, P, W_ica = fit(rets)
 Z = (rets - mu) / sd                                         # standardized with train stats only
 Ztr = Z.loc[TRAIN[0]:TRAIN[1]].clip(-CLIP, CLIP).values
-
-# ---------------------------------------------------------------- the three rotations (stocks x components)
-_, _, vt = np.linalg.svd(Ztr, full_matrices=False)
-P = vt[:M].T                                                 # top-M principal directions
 X = Ztr @ P                                                  # train data in PC coordinates
 
-W = {"PCA": P}
-
-ica = FastICA(n_components=M, whiten="unit-variance", random_state=0, max_iter=2000)
-ica.fit(X)
-W["ICA"] = P @ ica.components_.T                             # unmixing, mapped back to stocks
+# ---------------------------------------------------------------- the three rotations (stocks x components)
+W = {"PCA": P, "ICA": W_ica}
 
 X0, X1 = X[:-1], X[1:]
 A = np.linalg.lstsq(X0, X1, rcond=None)[0].T                 # VAR(1): x_t = A x_{t-1}
@@ -100,7 +88,7 @@ comp = pd.DataFrame(rows)
 # ---------------------------------------------------------------- summary
 results = {
     "stocks": rets.shape[1],
-    "dims": M,
+    "dims": P.shape[1],
     "box_tiao_train_r2_top5": bt_train_r2[:5].tolist(),
     "replication": {},
     "trading": {},
