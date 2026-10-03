@@ -1,0 +1,34 @@
+{
+  "1:1": {
+    "win_rate": 0.49839,
+    "loss_rate": 0.497595,
+    "timeout_rate": 0.004015,
+    "theory_win_rate_random_walk": 0.5,
+    "avg_units_per_trade_after_costs": -0.03601102341940038,
+    "t_stat": -10.802774115817874
+  },
+  "2:1": {
+    "win_rate": 0.35187,
+    "loss_rate": 0.62592,
+    "timeout_rate": 0.02221,
+    "theory_win_rate_random_walk": 0.3333333333333333,
+    "avg_units_per_trade_after_costs": -0.042909381746674725,
+    "t_stat": -9.924577227687774
+  },
+  "3:1": {
+    "win_rate": 0.258265,
+    "loss_rate": 0.682695,
+    "timeout_rate": 0.05904,
+    "theory_win_rate_random_walk": 0.25,
+    "avg_units_per_trade_after_costs": -0.03718120633057017,
+    "t_stat": -7.4263814921951345
+  },
+  "5:1": {
+    "win_rate": 0.132545,
+    "loss_rate": 0.72315,
+    "timeout_rate": 0.144305,
+    "theory_win_rate_random_walk": 0.16666666666666666,
+    "avg_units_per_trade_after_costs": -0.04922144412621701,
+    "t_stat": -8.443489171522238
+  }
+}

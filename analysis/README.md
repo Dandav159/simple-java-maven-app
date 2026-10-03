@@ -18,6 +18,8 @@ python ica_pca.py          # -> output/ica_pca_results.json, output/ica_pca.png
 
 python fetch_macro.py      # -> data/macro_*.csv, data/sp500_open.csv
 python ica_macro.py        # -> output/ica_macro_results.json, output/ica_macro.png
+python reward_risk.py      # -> output/reward_risk_results.json
+python patterns.py         # -> output/patterns_results.json, output/patterns.png
 ```
 
 ## Buckets (assigned by realized volatility in the train window only)
@@ -199,6 +201,26 @@ Ridge regressions fit on 2014–2020 and tested on 2021–2026; the 20 drivers a
 | C | Last month's outside moves → next month | −0.024 | −0.3%/yr (t −0.76) | **−0.4%/yr** |
 
 In each test, 3–4 of 20 drivers fall outside their ±2/√n noise band, against ~1 expected, and several of those point the wrong way. None of the trades is significant. SPY, the control, isn't predictable either: its forecast correlation is negative in all four tests (`output/ica_macro.png`). Asia is fully priced in by the US open. Outside data *explains* the drivers on the same day but does not *predict* them a day or a month ahead.
+
+## Part 7: reward:risk and chart patterns (`reward_risk.py`, `patterns.py`)
+
+**Reward:risk alone doesn't create profit.** With random entries, a stop 1 unit away and a target R units away (1 unit = 2× the stock's 20-day daily volatility), the win rate follows the random-walk value 1/(1+R): 49.8% at 1:1, 35.2% at 2:1, 25.8% at 3:1, 13.3% at 5:1. A wider target buys a lower win rate. After costs, every ratio loses about the same, 0.04–0.05 units per trade (200,000 trades each, t ≈ −7 to −11). "50% wins at 2:1" therefore requires predicting direction.
+
+**Chart patterns, traded at 2:1** and compared with random entries *in the same direction*. Random buys won 40.5% here, not 33%, because current S&P 500 members went up a lot (bull market plus survivorship), so a buy pattern must beat random buys to show skill.
+
+| Pattern | Direction | Trades | Win-rate gap vs random, train → test | Avg gap per trade, train → test (units) |
+|---|---|---:|---|---|
+| Trend pullback (dip while above 200-day avg) | buy | 32,772 | **+2.5 → +1.0 pts** | **+0.026 → +0.025** (monthly t 3.2 / 3.5) |
+| Floor bounce | buy | 3,397 | +0.5 → −2.4 | +0.061 → −0.048 |
+| Floor break | sell | 11,857 | +1.6 → −2.7 | +0.078 → −0.072 |
+| Ceiling rejection | sell | 6,281 | +0.3 → −0.7 | +0.035 → −0.025 |
+| Ceiling breakout | buy | 17,745 | **−0.7 → −1.4** | **−0.018 → −0.046** (monthly t −2.8 / −3.6) |
+| Golden cross | buy | 4,027 | −1.1 → −2.4 | −0.037 → −0.063 |
+| Death cross | sell | 4,067 | −2.4 → −2.4 | −0.012 → −0.047 |
+
+- **Floors and ceilings do nothing reliable.** Their small train-period edges reverse in test (`output/patterns.png`).
+- **Breakouts and moving-average crosses do *worse* than random.** Prices that break a ceiling tend to fall back, so these patterns trade in the wrong direction.
+- **Buying pullbacks in an uptrend is the one consistent pattern.** It is short-term mean reversion inside a trend, matching the one-day bounce from Part 3. But the edge over random buys is about 0.025 units per trade, roughly **0.08% per trade** (median unit ≈ 3.1%). Its test win rate is 39.7%, nowhere near 50%.
 
 ## Caveats
 - **Parts 2–6 universe:** only current S&P 500 members could be downloaded. Each stock enters only from its index-inclusion date, but stocks that were removed (often losers) are still missing. This likely biases the result against low volatility, because high-volatility stocks that survived to 2026 are the winners.

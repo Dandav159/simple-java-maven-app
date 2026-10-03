@@ -1,0 +1,422 @@
+{
+  "floor_bounce": {
+    "direction": "buy",
+    "train": {
+      "pattern": {
+        "trades": 1756,
+        "win_rate": 0.4265375854214123,
+        "loss_rate": 0.5301822323462415,
+        "avg_units": 0.24734610400520005,
+        "t_monthly": 3.1547929032583406
+      },
+      "random_same_direction": {
+        "trades": 40606,
+        "win_rate": 0.4218095847904251,
+        "loss_rate": 0.544476185785352,
+        "avg_units": 0.18660095732659626,
+        "t_monthly": 2.895411895784718
+      },
+      "edge_units": 0.0555984096136791,
+      "edge_win_rate": 0.004728000630987217,
+      "edge_t_monthly": 0.9163425187336653
+    },
+    "test": {
+      "pattern": {
+        "trades": 1929,
+        "win_rate": 0.3634007257646449,
+        "loss_rate": 0.5914981855883877,
+        "avg_units": 0.015301946388845574,
+        "t_monthly": 1.283669329119038
+      },
+      "random_same_direction": {
+        "trades": 39394,
+        "win_rate": 0.38693709701985074,
+        "loss_rate": 0.5839721785043408,
+        "avg_units": 0.06309951340310975,
+        "t_monthly": 0.883927328250688
+      },
+      "edge_units": 0.05432663965500049,
+      "edge_win_rate": -0.023536371255205857,
+      "edge_t_monthly": 0.930304172727431
+    },
+    "all": {
+      "pattern": {
+        "trades": 3397,
+        "win_rate": 0.4012363850456285,
+        "loss_rate": 0.5604945540182514,
+        "avg_units": 0.14611608982341615,
+        "t_monthly": 3.3681716646388407
+      },
+      "random_same_direction": {
+        "trades": 74975,
+        "win_rate": 0.40982994331443817,
+        "loss_rate": 0.5618539513171057,
+        "avg_units": 0.1392240761541776,
+        "t_monthly": 2.9242968744554614
+      },
+      "edge_units": 0.05900079043047277,
+      "edge_win_rate": -0.008593558268809698,
+      "edge_t_monthly": 1.3373260089389871
+    }
+  },
+  "floor_break": {
+    "direction": "sell",
+    "train": {
+      "pattern": {
+        "trades": 6252,
+        "win_rate": 0.29222648752399233,
+        "loss_rate": 0.6852207293666027,
+        "avg_units": -0.20261880319988831,
+        "t_monthly": -6.342530454550151
+      },
+      "random_same_direction": {
+        "trades": 40607,
+        "win_rate": 0.27625778806609697,
+        "loss_rate": 0.7021449503780136,
+        "avg_units": -0.2808064686978377,
+        "t_monthly": -4.724804909848359
+      },
+      "edge_units": -0.12415519494013381,
+      "edge_win_rate": 0.015968699457895363,
+      "edge_t_monthly": -2.725010976447724
+    },
+    "test": {
+      "pattern": {
+        "trades": 6481,
+        "win_rate": 0.29331893226353956,
+        "loss_rate": 0.6728899861132541,
+        "avg_units": -0.18638797173813132,
+        "t_monthly": -4.645337705877389
+      },
+      "random_same_direction": {
+        "trades": 39393,
+        "win_rate": 0.3202853298809433,
+        "loss_rate": 0.6547102277054299,
+        "avg_units": -0.11484826327304853,
+        "t_monthly": -1.8960257270240175
+      },
+      "edge_units": -0.19411703401790004,
+      "edge_win_rate": -0.02696639761740377,
+      "edge_t_monthly": -4.3398657082918595
+    },
+    "all": {
+      "pattern": {
+        "trades": 11857,
+        "win_rate": 0.2926541283629923,
+        "loss_rate": 0.6855022349666864,
+        "avg_units": -0.20579318010642722,
+        "t_monthly": -8.047810910376024
+      },
+      "random_same_direction": {
+        "trades": 74850,
+        "win_rate": 0.29564462257849033,
+        "loss_rate": 0.6854909819639279,
+        "avg_units": -0.21507297872274497,
+        "t_monthly": -4.902953575094029
+      },
+      "edge_units": -0.16269507117004361,
+      "edge_win_rate": -0.0029904942154980185,
+      "edge_t_monthly": -4.89347304874364
+    }
+  },
+  "ceiling_reject": {
+    "direction": "sell",
+    "train": {
+      "pattern": {
+        "trades": 3676,
+        "win_rate": 0.27883569096844396,
+        "loss_rate": 0.69069640914037,
+        "avg_units": -0.24626277083518458,
+        "t_monthly": -2.25993653090566
+      },
+      "random_same_direction": {
+        "trades": 40607,
+        "win_rate": 0.27625778806609697,
+        "loss_rate": 0.7021449503780136,
+        "avg_units": -0.2808064686978377,
+        "t_monthly": -4.724804909848359
+      },
+      "edge_units": 0.10973070916570518,
+      "edge_win_rate": 0.0025779029023469957,
+      "edge_t_monthly": 2.1972059339077745
+    },
+    "test": {
+      "pattern": {
+        "trades": 2949,
+        "win_rate": 0.3129874533740251,
+        "loss_rate": 0.6575110206849779,
+        "avg_units": -0.13940029512236293,
+        "t_monthly": -0.24049608170782033
+      },
+      "random_same_direction": {
+        "trades": 39393,
+        "win_rate": 0.3202853298809433,
+        "loss_rate": 0.6547102277054299,
+        "avg_units": -0.11484826327304853,
+        "t_monthly": -1.8960257270240175
+      },
+      "edge_units": 0.09534245824791185,
+      "edge_win_rate": -0.0072978765069182105,
+      "edge_t_monthly": 1.7482711721019388
+    },
+    "all": {
+      "pattern": {
+        "trades": 6281,
+        "win_rate": 0.29246935201401053,
+        "loss_rate": 0.6801464734914823,
+        "avg_units": -0.20865755337119002,
+        "t_monthly": -1.9417705904764637
+      },
+      "random_same_direction": {
+        "trades": 74850,
+        "win_rate": 0.29564462257849033,
+        "loss_rate": 0.6854909819639279,
+        "avg_units": -0.21507297872274497,
+        "t_monthly": -4.902953575094029
+      },
+      "edge_units": 0.11178529712092661,
+      "edge_win_rate": -0.003175270564479804,
+      "edge_t_monthly": 2.91281055954439
+    }
+  },
+  "ceiling_breakout": {
+    "direction": "buy",
+    "train": {
+      "pattern": {
+        "trades": 10258,
+        "win_rate": 0.4144082667186586,
+        "loss_rate": 0.5473776564632482,
+        "avg_units": 0.1686681056174296,
+        "t_monthly": 1.0290214368952009
+      },
+      "random_same_direction": {
+        "trades": 40606,
+        "win_rate": 0.4218095847904251,
+        "loss_rate": 0.544476185785352,
+        "avg_units": 0.18660095732659626,
+        "t_monthly": 2.895411895784718
+      },
+      "edge_units": -0.11003753012328527,
+      "edge_win_rate": -0.007401318071766472,
+      "edge_t_monthly": -2.7643375656177533
+    },
+    "test": {
+      "pattern": {
+        "trades": 8568,
+        "win_rate": 0.37289915966386555,
+        "loss_rate": 0.5973389355742297,
+        "avg_units": 0.016620483510974598,
+        "t_monthly": -1.3362047537440058
+      },
+      "random_same_direction": {
+        "trades": 39394,
+        "win_rate": 0.38693709701985074,
+        "loss_rate": 0.5839721785043408,
+        "avg_units": 0.06309951340310975,
+        "t_monthly": 0.883927328250688
+      },
+      "edge_units": -0.15209277736264046,
+      "edge_win_rate": -0.014037937355985186,
+      "edge_t_monthly": -3.6156227497216595
+    },
+    "all": {
+      "pattern": {
+        "trades": 17745,
+        "win_rate": 0.3999436460974923,
+        "loss_rate": 0.5666948436179206,
+        "avg_units": 0.11213662115464648,
+        "t_monthly": 0.13949073426215783
+      },
+      "random_same_direction": {
+        "trades": 74975,
+        "win_rate": 0.40982994331443817,
+        "loss_rate": 0.5618539513171057,
+        "avg_units": 0.1392240761541776,
+        "t_monthly": 2.9242968744554614
+      },
+      "edge_units": -0.1327108526475828,
+      "edge_win_rate": -0.009886297216945894,
+      "edge_t_monthly": -4.430409268060657
+    }
+  },
+  "trend_pullback": {
+    "direction": "buy",
+    "train": {
+      "pattern": {
+        "trades": 17865,
+        "win_rate": 0.4463476070528967,
+        "loss_rate": 0.539098796529527,
+        "avg_units": 0.21308685160304255,
+        "t_monthly": 4.42772040603059
+      },
+      "random_same_direction": {
+        "trades": 40606,
+        "win_rate": 0.4218095847904251,
+        "loss_rate": 0.544476185785352,
+        "avg_units": 0.18660095732659626,
+        "t_monthly": 2.895411895784718
+      },
+      "edge_units": 0.14524419879228798,
+      "edge_win_rate": 0.024538022262471648,
+      "edge_t_monthly": 3.1904496192180924
+    },
+    "test": {
+      "pattern": {
+        "trades": 17159,
+        "win_rate": 0.39722594556792357,
+        "loss_rate": 0.5807447986479398,
+        "avg_units": 0.08818829605982335,
+        "t_monthly": 2.6263340217995226
+      },
+      "random_same_direction": {
+        "trades": 39394,
+        "win_rate": 0.38693709701985074,
+        "loss_rate": 0.5839721785043408,
+        "avg_units": 0.06309951340310975,
+        "t_monthly": 0.883927328250688
+      },
+      "edge_units": 0.1285129963029177,
+      "edge_win_rate": 0.010288848548072826,
+      "edge_t_monthly": 3.516132285595945
+    },
+    "all": {
+      "pattern": {
+        "trades": 32772,
+        "win_rate": 0.4285975833028195,
+        "loss_rate": 0.5572134749176126,
+        "avg_units": 0.1662852679584769,
+        "t_monthly": 5.244198400410144
+      },
+      "random_same_direction": {
+        "trades": 74975,
+        "win_rate": 0.40982994331443817,
+        "loss_rate": 0.5618539513171057,
+        "avg_units": 0.1392240761541776,
+        "t_monthly": 2.9242968744554614
+      },
+      "edge_units": 0.14386563958569512,
+      "edge_win_rate": 0.018767639988381324,
+      "edge_t_monthly": 4.635958145967279
+    }
+  },
+  "golden_cross": {
+    "direction": "buy",
+    "train": {
+      "pattern": {
+        "trades": 2293,
+        "win_rate": 0.4108155255124291,
+        "loss_rate": 0.5621456607064981,
+        "avg_units": 0.1498073951074467,
+        "t_monthly": 1.0012436849461972
+      },
+      "random_same_direction": {
+        "trades": 40606,
+        "win_rate": 0.4218095847904251,
+        "loss_rate": 0.544476185785352,
+        "avg_units": 0.18660095732659626,
+        "t_monthly": 2.895411895784718
+      },
+      "edge_units": -0.09565416701153631,
+      "edge_win_rate": -0.01099405927799596,
+      "edge_t_monthly": -1.497571592082434
+    },
+    "test": {
+      "pattern": {
+        "trades": 2020,
+        "win_rate": 0.36287128712871286,
+        "loss_rate": 0.6074257425742574,
+        "avg_units": 0.000297515014576617,
+        "t_monthly": 0.13518063069718708
+      },
+      "random_same_direction": {
+        "trades": 39394,
+        "win_rate": 0.38693709701985074,
+        "loss_rate": 0.5839721785043408,
+        "avg_units": 0.06309951340310975,
+        "t_monthly": 0.883927328250688
+      },
+      "edge_units": -0.04449384109464667,
+      "edge_win_rate": -0.02406580989113788,
+      "edge_t_monthly": -0.722121143609109
+    },
+    "all": {
+      "pattern": {
+        "trades": 4027,
+        "win_rate": 0.39259995033523715,
+        "loss_rate": 0.581574372982369,
+        "avg_units": 0.09466683604706687,
+        "t_monthly": 0.9843081345164679
+      },
+      "random_same_direction": {
+        "trades": 74975,
+        "win_rate": 0.40982994331443817,
+        "loss_rate": 0.5618539513171057,
+        "avg_units": 0.1392240761541776,
+        "t_monthly": 2.9242968744554614
+      },
+      "edge_units": -0.07444048020071194,
+      "edge_win_rate": -0.017229992979201025,
+      "edge_t_monthly": -1.5894948861935196
+    }
+  },
+  "death_cross": {
+    "direction": "sell",
+    "train": {
+      "pattern": {
+        "trades": 2198,
+        "win_rate": 0.25250227479526843,
+        "loss_rate": 0.7106460418562329,
+        "avg_units": -0.29244846104271804,
+        "t_monthly": -4.354711959644954
+      },
+      "random_same_direction": {
+        "trades": 40607,
+        "win_rate": 0.27625778806609697,
+        "loss_rate": 0.7021449503780136,
+        "avg_units": -0.2808064686978377,
+        "t_monthly": -4.724804909848359
+      },
+      "edge_units": -0.04044492339078294,
+      "edge_win_rate": -0.023755513270828532,
+      "edge_t_monthly": -0.6133179543465875
+    },
+    "test": {
+      "pattern": {
+        "trades": 2132,
+        "win_rate": 0.2964352720450281,
+        "loss_rate": 0.6712007504690432,
+        "avg_units": -0.16191429336725147,
+        "t_monthly": -1.829124944681432
+      },
+      "random_same_direction": {
+        "trades": 39393,
+        "win_rate": 0.3202853298809433,
+        "loss_rate": 0.6547102277054299,
+        "avg_units": -0.11484826327304853,
+        "t_monthly": -1.8960257270240175
+      },
+      "edge_units": -0.038851389477421505,
+      "edge_win_rate": -0.023850057835915206,
+      "edge_t_monthly": -0.606426397718921
+    },
+    "all": {
+      "pattern": {
+        "trades": 4067,
+        "win_rate": 0.2751413818539464,
+        "loss_rate": 0.6970740103270223,
+        "avg_units": -0.2326857158715353,
+        "t_monthly": -4.272248162655664
+      },
+      "random_same_direction": {
+        "trades": 74850,
+        "win_rate": 0.29564462257849033,
+        "loss_rate": 0.6854909819639279,
+        "avg_units": -0.21507297872274497,
+        "t_monthly": -4.902953575094029
+      },
+      "edge_units": -0.031028135761553822,
+      "edge_win_rate": -0.02050324072454396,
+      "edge_t_monthly": -0.6435691332560765
+    }
+  }
+}
