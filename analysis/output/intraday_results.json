@@ -1,0 +1,338 @@
+{
+  "meta": {
+    "hourly": [
+      "2023-11-03",
+      "2026-10-02",
+      721,
+      "2025-04-21"
+    ],
+    "five_min": [
+      "2026-07-10",
+      "2026-10-02",
+      60,
+      "2026-08-21"
+    ]
+  },
+  "results": {
+    "momentum_1h_etfs": {
+      "all": {
+        "trades": 2159,
+        "days": 720,
+        "gross_bps_per_trade": -0.08516027341011083,
+        "win_rate": 0.5016211208893006,
+        "t_stat_by_day": -0.08513175196383312,
+        "break_even_cost_bps_per_side": -0.042580136705055414,
+        "net_bps_pro (1 bp/side)": -2.0851602734101107,
+        "net_bps_retail (3 bp/side)": -6.085160273410111
+      },
+      "first_half": {
+        "trades": 1077,
+        "days": 359,
+        "gross_bps_per_trade": -0.5693052655420646,
+        "win_rate": 0.4911792014856082,
+        "t_stat_by_day": -0.470165086756616,
+        "break_even_cost_bps_per_side": -0.2846526327710323,
+        "net_bps_pro (1 bp/side)": -2.5693052655420647,
+        "net_bps_retail (3 bp/side)": -6.569305265542065
+      },
+      "second_half": {
+        "trades": 1082,
+        "days": 361,
+        "gross_bps_per_trade": 0.3967474498118057,
+        "win_rate": 0.512014787430684,
+        "t_stat_by_day": 0.4485778967533065,
+        "break_even_cost_bps_per_side": 0.19837372490590285,
+        "net_bps_pro (1 bp/side)": -1.6032525501881942,
+        "net_bps_retail (3 bp/side)": -5.603252550188194
+      }
+    },
+    "momentum_1h_stocks": {
+      "all": {
+        "trades": 352211,
+        "days": 720,
+        "gross_bps_per_trade": -0.02175678562966929,
+        "win_rate": 0.4996919460209931,
+        "t_stat_by_day": -0.0648757704530013,
+        "break_even_cost_bps_per_side": -0.010878392814834645,
+        "net_bps_pro (1 bp/side)": -2.021756785629669,
+        "net_bps_retail (3 bp/side)": -6.02175678562967
+      },
+      "first_half": {
+        "trades": 174299,
+        "days": 359,
+        "gross_bps_per_trade": -0.23072543833521328,
+        "win_rate": 0.49261900527254887,
+        "t_stat_by_day": -0.3825623885247898,
+        "break_even_cost_bps_per_side": -0.11536271916760664,
+        "net_bps_pro (1 bp/side)": -2.230725438335213,
+        "net_bps_retail (3 bp/side)": -6.230725438335213
+      },
+      "second_half": {
+        "trades": 177912,
+        "days": 361,
+        "gross_bps_per_trade": 0.18296817501336582,
+        "win_rate": 0.5066212509555286,
+        "t_stat_by_day": 0.34547400820571655,
+        "break_even_cost_bps_per_side": 0.09148408750668291,
+        "net_bps_pro (1 bp/side)": -1.8170318249866342,
+        "net_bps_retail (3 bp/side)": -5.817031824986634
+      }
+    },
+    "gap_fade": {
+      "all": {
+        "trades": 157628,
+        "days": 720,
+        "gross_bps_per_trade": 6.850015350369006,
+        "win_rate": 0.5190765600020301,
+        "t_stat_by_day": 1.9297567764401837,
+        "break_even_cost_bps_per_side": 3.425007675184503,
+        "net_bps_pro (1 bp/side)": 4.850015350369006,
+        "net_bps_retail (3 bp/side)": 0.8500153503690058
+      },
+      "first_half": {
+        "trades": 73632,
+        "days": 359,
+        "gross_bps_per_trade": 10.628117964311674,
+        "win_rate": 0.5222593437635811,
+        "t_stat_by_day": 1.875914325744056,
+        "break_even_cost_bps_per_side": 5.314058982155837,
+        "net_bps_pro (1 bp/side)": 8.628117964311674,
+        "net_bps_retail (3 bp/side)": 4.628117964311674
+      },
+      "second_half": {
+        "trades": 83996,
+        "days": 361,
+        "gross_bps_per_trade": 3.5380808336083684,
+        "win_rate": 0.5162864898328492,
+        "t_stat_by_day": 0.7320327471423432,
+        "break_even_cost_bps_per_side": 1.7690404168041842,
+        "net_bps_pro (1 bp/side)": 1.5380808336083684,
+        "net_bps_retail (3 bp/side)": -2.4619191663916316
+      }
+    },
+    "orb_1h": {
+      "all": {
+        "trades": 233021,
+        "days": 721,
+        "gross_bps_per_trade": -0.3399099678624099,
+        "win_rate": 0.48688315645371016,
+        "t_stat_by_day": -1.420669944644509,
+        "break_even_cost_bps_per_side": -0.16995498393120495,
+        "net_bps_pro (1 bp/side)": -2.33990996786241,
+        "net_bps_retail (3 bp/side)": -6.33990996786241
+      },
+      "first_half": {
+        "trades": 117186,
+        "days": 360,
+        "gross_bps_per_trade": 0.6824505685952721,
+        "win_rate": 0.48883825712969126,
+        "t_stat_by_day": -0.4476397232324135,
+        "break_even_cost_bps_per_side": 0.34122528429763604,
+        "net_bps_pro (1 bp/side)": -1.317549431404728,
+        "net_bps_retail (3 bp/side)": -5.317549431404728
+      },
+      "second_half": {
+        "trades": 115835,
+        "days": 361,
+        "gross_bps_per_trade": -1.3741944399591846,
+        "win_rate": 0.48490525316182503,
+        "t_stat_by_day": -1.7374835228058667,
+        "break_even_cost_bps_per_side": -0.6870972199795923,
+        "net_bps_pro (1 bp/side)": -3.3741944399591848,
+        "net_bps_retail (3 bp/side)": -7.374194439959185
+      }
+    },
+    "reversal_1h": {
+      "all": {
+        "trades": 4326,
+        "days": 721,
+        "gross_bps_per_trade": 0.6134716683650615,
+        "win_rate": 0.5263522884882108,
+        "t_stat_by_day": 2.458252137220878,
+        "break_even_cost_bps_per_side": 0.30673583418253075,
+        "net_bps_pro (1 bp/side)": -1.3865283316349384,
+        "net_bps_retail (3 bp/side)": -5.386528331634938
+      },
+      "first_half": {
+        "trades": 2160,
+        "days": 360,
+        "gross_bps_per_trade": 1.1288600249521534,
+        "win_rate": 0.5569444444444445,
+        "t_stat_by_day": 3.5638473181578445,
+        "break_even_cost_bps_per_side": 0.5644300124760767,
+        "net_bps_pro (1 bp/side)": -0.8711399750478466,
+        "net_bps_retail (3 bp/side)": -4.871139975047846
+      },
+      "second_half": {
+        "trades": 2166,
+        "days": 361,
+        "gross_bps_per_trade": 0.09951098035577331,
+        "win_rate": 0.49584487534626037,
+        "t_stat_by_day": 0.25908560651773616,
+        "break_even_cost_bps_per_side": 0.049755490177886656,
+        "net_bps_pro (1 bp/side)": -1.9004890196442268,
+        "net_bps_retail (3 bp/side)": -5.900489019644227
+      }
+    },
+    "momentum_30m_etfs": {
+      "all": {
+        "trades": 177,
+        "days": 59,
+        "gross_bps_per_trade": 1.0918640061720009,
+        "win_rate": 0.4350282485875706,
+        "t_stat_by_day": 0.46659260720490825,
+        "break_even_cost_bps_per_side": 0.5459320030860004,
+        "net_bps_pro (1 bp/side)": -0.9081359938279991,
+        "net_bps_retail (3 bp/side)": -4.908135993827999
+      },
+      "first_half": {
+        "trades": 87,
+        "days": 29,
+        "gross_bps_per_trade": 0.8166743981291774,
+        "win_rate": 0.40229885057471265,
+        "t_stat_by_day": 0.21096798511080894,
+        "break_even_cost_bps_per_side": 0.4083371990645887,
+        "net_bps_pro (1 bp/side)": -1.1833256018708225,
+        "net_bps_retail (3 bp/side)": -5.1833256018708225
+      },
+      "second_half": {
+        "trades": 90,
+        "days": 30,
+        "gross_bps_per_trade": 1.3578806272800639,
+        "win_rate": 0.4666666666666667,
+        "t_stat_by_day": 0.4942616320481227,
+        "break_even_cost_bps_per_side": 0.6789403136400319,
+        "net_bps_pro (1 bp/side)": -0.6421193727199361,
+        "net_bps_retail (3 bp/side)": -4.642119372719936
+      }
+    },
+    "momentum_30m_stocks": {
+      "all": {
+        "trades": 27574,
+        "days": 59,
+        "gross_bps_per_trade": 2.6306750518355826,
+        "win_rate": 0.5240806556901428,
+        "t_stat_by_day": 2.515750335495496,
+        "break_even_cost_bps_per_side": 1.3153375259177913,
+        "net_bps_pro (1 bp/side)": 0.6306750518355826,
+        "net_bps_retail (3 bp/side)": -3.3693249481644174
+      },
+      "first_half": {
+        "trades": 13600,
+        "days": 29,
+        "gross_bps_per_trade": 2.5551044595491192,
+        "win_rate": 0.5238970588235294,
+        "t_stat_by_day": 1.398068773424365,
+        "break_even_cost_bps_per_side": 1.2775522297745596,
+        "net_bps_pro (1 bp/side)": 0.5551044595491192,
+        "net_bps_retail (3 bp/side)": -3.4448955404508808
+      },
+      "second_half": {
+        "trades": 13974,
+        "days": 30,
+        "gross_bps_per_trade": 2.704223073525571,
+        "win_rate": 0.5242593387720051,
+        "t_stat_by_day": 2.4578230313746596,
+        "break_even_cost_bps_per_side": 1.3521115367627854,
+        "net_bps_pro (1 bp/side)": 0.7042230735255708,
+        "net_bps_retail (3 bp/side)": -3.295776926474429
+      }
+    },
+    "orb_15m_with_stop": {
+      "all": {
+        "trades": 27018,
+        "days": 60,
+        "gross_bps_per_trade": -4.498321930638694,
+        "win_rate": 0.46698497298097563,
+        "t_stat_by_day": -2.035881614236529,
+        "break_even_cost_bps_per_side": -2.249160965319347,
+        "net_bps_pro (1 bp/side)": -6.498321930638694,
+        "net_bps_retail (3 bp/side)": -10.498321930638694
+      },
+      "first_half": {
+        "trades": 13541,
+        "days": 30,
+        "gross_bps_per_trade": -1.184643642349059,
+        "win_rate": 0.4806144302488738,
+        "t_stat_by_day": -0.39830035413576265,
+        "break_even_cost_bps_per_side": -0.5923218211745295,
+        "net_bps_pro (1 bp/side)": -3.1846436423490587,
+        "net_bps_retail (3 bp/side)": -7.184643642349059
+      },
+      "second_half": {
+        "trades": 13477,
+        "days": 30,
+        "gross_bps_per_trade": -7.827736318242013,
+        "win_rate": 0.45329079171922537,
+        "t_stat_by_day": -2.882971440338487,
+        "break_even_cost_bps_per_side": -3.9138681591210065,
+        "net_bps_pro (1 bp/side)": -9.827736318242014,
+        "net_bps_retail (3 bp/side)": -13.827736318242014
+      }
+    },
+    "vwap_reversion": {
+      "all": {
+        "trades": 120573,
+        "days": 59,
+        "gross_bps_per_trade": 0.695765105324075,
+        "win_rate": 0.5103381354034485,
+        "t_stat_by_day": 2.3839833173066975,
+        "break_even_cost_bps_per_side": 0.3478825526620375,
+        "net_bps_pro (1 bp/side)": -1.304234894675925,
+        "net_bps_retail (3 bp/side)": -5.3042348946759255
+      },
+      "first_half": {
+        "trades": 61746,
+        "days": 29,
+        "gross_bps_per_trade": -0.36294338418232763,
+        "win_rate": 0.4973601528843974,
+        "t_stat_by_day": -0.05354459046785394,
+        "break_even_cost_bps_per_side": -0.18147169209116382,
+        "net_bps_pro (1 bp/side)": -2.3629433841823277,
+        "net_bps_retail (3 bp/side)": -6.362943384182327
+      },
+      "second_half": {
+        "trades": 58827,
+        "days": 30,
+        "gross_bps_per_trade": 1.8070067867469308,
+        "win_rate": 0.5239600863549051,
+        "t_stat_by_day": 4.139540752266498,
+        "break_even_cost_bps_per_side": 0.9035033933734654,
+        "net_bps_pro (1 bp/side)": -0.19299321325306917,
+        "net_bps_retail (3 bp/side)": -4.192993213253069
+      }
+    },
+    "reversal_5m": {
+      "all": {
+        "trades": 4620,
+        "days": 60,
+        "gross_bps_per_trade": 0.9261144309676969,
+        "win_rate": 0.59004329004329,
+        "t_stat_by_day": 7.031947842605048,
+        "break_even_cost_bps_per_side": 0.46305721548384843,
+        "net_bps_pro (1 bp/side)": -1.0738855690323033,
+        "net_bps_retail (3 bp/side)": -5.073885569032303
+      },
+      "first_half": {
+        "trades": 2310,
+        "days": 30,
+        "gross_bps_per_trade": 1.0826764264548059,
+        "win_rate": 0.5991341991341992,
+        "t_stat_by_day": 4.790070836016511,
+        "break_even_cost_bps_per_side": 0.5413382132274029,
+        "net_bps_pro (1 bp/side)": -0.9173235735451941,
+        "net_bps_retail (3 bp/side)": -4.917323573545194
+      },
+      "second_half": {
+        "trades": 2310,
+        "days": 30,
+        "gross_bps_per_trade": 0.7695524354805877,
+        "win_rate": 0.580952380952381,
+        "t_stat_by_day": 5.768203288928161,
+        "break_even_cost_bps_per_side": 0.38477621774029386,
+        "net_bps_pro (1 bp/side)": -1.2304475645194124,
+        "net_bps_retail (3 bp/side)": -5.230447564519412
+      }
+    }
+  }
+}

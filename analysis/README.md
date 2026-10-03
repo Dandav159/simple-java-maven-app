@@ -20,6 +20,10 @@ python fetch_macro.py      # -> data/macro_*.csv, data/sp500_open.csv
 python ica_macro.py        # -> output/ica_macro_results.json, output/ica_macro.png
 python reward_risk.py      # -> output/reward_risk_results.json
 python patterns.py         # -> output/patterns_results.json, output/patterns.png
+
+pip install pyarrow
+python fetch_intraday.py   # -> data/intraday_60m.parquet, data/intraday_5m.parquet (not in git, ~110 MB)
+python intraday.py         # -> output/intraday_results.json, output/intraday.png
 ```
 
 ## Buckets (assigned by realized volatility in the train window only)
@@ -221,6 +225,29 @@ In each test, 3–4 of 20 drivers fall outside their ±2/√n noise band, agains
 - **Floors and ceilings do nothing reliable.** Their small train-period edges reverse in test (`output/patterns.png`).
 - **Breakouts and moving-average crosses do *worse* than random.** Prices that break a ceiling tend to fall back, so these patterns trade in the wrong direction.
 - **Buying pullbacks in an uptrend is the one consistent pattern.** It is short-term mean reversion inside a trend, matching the one-day bounce from Part 3. But the edge over random buys is about 0.025 units per trade, roughly **0.08% per trade** (median unit ≈ 3.1%). Its test win rate is 39.7%, nowhere near 50%.
+
+## Part 8: intraday (day-trading) patterns (`intraday.py`)
+
+Yahoo's free intraday limits: **hourly bars for ~730 trading days** (Nov 2023 – Oct 2026; 2.5M bars) and **5-minute bars for 60 trading days** (Jul – Oct 2026; 2.4M bars), for all S&P 500 members plus SPY, QQQ and IWM. Patterns are fixed in advance. Each dataset is split in half by date to check stability. Results are gross basis points per trade (1 bp = 0.01%) with day-clustered t-stats. Realistic costs are about 1 bp per side for a professional in liquid names and about 3 bp per side for retail, so an edge must clear **2–6 bp per round trip**.
+
+| Pattern | Data | Trades | Gross bp/trade, 1st → 2nd half (t) | Break-even cost, bp/side |
+|---|---|---:|---|---:|
+| Intraday momentum, first hour → last half hour (ETFs) | hourly | 2,159 | −0.6 (−0.5) → +0.4 (0.4) | ≈ 0 |
+| Intraday momentum, same (stocks) | hourly | 352,211 | −0.2 → +0.2 | ≈ 0 |
+| Gap fade (gap ≥ 0.5%, bet against it, open → close) | hourly | 157,628 | **+10.6 (1.9) → +3.5 (0.7)** | 3.4 |
+| Opening-range breakout, first hour | hourly | 233,021 | +0.7 → −1.4 (−1.7) | < 0 |
+| Hourly reversal (buy losers, short winners, 1h) | hourly | 4,326 | +1.1 (3.6) → +0.1 (0.3) | 0.3 |
+| Intraday momentum, paper's 30-minute spec (ETFs) | 5-min | 177 | +0.8 → +1.4 | 0.6 |
+| Intraday momentum, 30-minute spec (stocks) | 5-min | 27,574 | +2.6 (1.4) → +2.7 (2.5) | 1.3 |
+| Opening-range breakout, 15 min, with stop | 5-min | 27,018 | −1.2 → **−7.8 (−2.9)** | < 0 |
+| VWAP reversion (1 hour-sigma away, 30 min) | 5-min | 120,573 | −0.4 → +1.8 (4.1) | 0.4 |
+| 5-minute reversal (buy losers, short winners) | 5-min | 4,620 | **+1.1 (4.8) → +0.8 (5.8)**, 59% wins | 0.5 |
+
+- **Opening-range breakouts**, the most popular day-trading setup, **lose money before costs**: −7.8 bp/trade in the second half of the 5-minute sample.
+- **The 5-minute reversal is the most statistically solid pattern here** (t ≈ 5–6, 59% winners), but it earns ~1 bp per trade, less than half the spread. Much of it is "bid-ask bounce": the last trade alternates between the bid and the ask, so the price appears to reverse. Market makers, who *earn* the spread instead of paying it, collect this edge.
+- **Gap fades** were the largest edge, +10.6 bp in 2023–25, but shrank to +3.5 bp (t 0.7) in 2025–26, below retail costs.
+- **The published intraday momentum effect** (Gao et al. 2018) is absent on hourly data. On the 30-minute spec, stocks show +2.7 bp (t 2.5) over only 60 days, which breaks even at ~1.3 bp per side: professional costs at best.
+- **No pattern clears retail costs consistently in both halves.** The 5-minute sample covers just 60 days in a single market regime, so its results are the least reliable here.
 
 ## Caveats
 - **Parts 2–6 universe:** only current S&P 500 members could be downloaded. Each stock enters only from its index-inclusion date, but stocks that were removed (often losers) are still missing. This likely biases the result against low volatility, because high-volatility stocks that survived to 2026 are the winners.
